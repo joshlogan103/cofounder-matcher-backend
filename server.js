@@ -4,7 +4,6 @@ import dotenv from 'dotenv/config.js';
 // Import modules
 import express from 'express';
 import morgan from 'morgan';
-import mongoose from 'mongoose';
 import cors from 'cors';
 import authRouter from './api/routes/authRoutes.js';
 import userRouter from './api/routes/userRoutes.js';

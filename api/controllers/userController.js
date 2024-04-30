@@ -97,7 +97,7 @@ export const updateUserById = async (req, res) => {
     await userToUpdate.save()
 
     res.json({
-      message: `User ${userData.name} was updated successfully`
+      message: `User ${userData.username} was updated successfully`
     })
 
   } catch (error) {
