@@ -28,7 +28,7 @@ This is an application to enable students to find and connect with other people 
 
 #### As an Admin
 
-* AAA, I would like to be able manage users
+* AAA, I would like to be able manage users and content
 
 ## ERD
 
