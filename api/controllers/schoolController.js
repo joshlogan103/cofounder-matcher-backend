@@ -66,7 +66,7 @@ export const createSchool = async (req, res) => {
     }
 
     res.json({
-      message: `School ${schoolData.name} was created successfully`
+      message: `School ${schoolCreated.name} was created successfully`
     })
 
   } catch (error) {

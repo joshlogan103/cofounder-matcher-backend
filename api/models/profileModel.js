@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import School from './schoolModel.js'
 
 const Schema = mongoose.Schema
 
@@ -35,6 +36,18 @@ const profileSchema = new Schema({
     required: true
   },
   email: {
+    type: String,
+    required: true
+  },
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  fullName: {
     type: String,
     required: true
   },
@@ -91,14 +104,16 @@ const profileSchema = new Schema({
         'Other'
       ]
     }],
-    required: false 
+    required: false
   },
   interestedInBeingACofounder: {
     type: Boolean,
     required: true
   },
   currentSchool: {
-    type: String
+    type: ObjectId,
+    ref: 'School',
+    required: true,
   },
   programType: {
     type: String,
@@ -115,7 +130,7 @@ const profileSchema = new Schema({
       'Public Administration',
       'Other'
     ],
-    required: true 
+    required: true
   },
   birthDate: {
     type: Date
@@ -145,15 +160,17 @@ const profileSchema = new Schema({
     type: [String]
   },
   areasOfResponsibility: {
-    type: [{ type: String, enum: [
-      'Business Strategy',
-      'Product Development',
-      'Marketing and Sales',
-      'Technology and Engineering',
-      'Operations',
-      'Finance and Fundraising',
-      'Legal and Compliance'
-    ]}],
+    type: [{
+      type: String, enum: [
+        'Business Strategy',
+        'Product Development',
+        'Marketing and Sales',
+        'Technology and Engineering',
+        'Operations',
+        'Finance and Fundraising',
+        'Legal and Compliance'
+      ]
+    }],
     required: false
   },
   cofounderDesiredQualities: {
@@ -171,7 +188,59 @@ const profileSchema = new Schema({
   socialMedia: {
     type: socialMediaSchema
   }
-}, {timestamps: true})
+}, { timestamps: true })
+
+profileSchema.post('save', function (doc) {
+  if (doc.isModified('firstName') || doc.isModified('lastName')) {
+    doc.fullName = `${firstName} ${lastName}`
+  }
+})
+
+profileSchema.post('save', async function (doc) {
+  const schoolId = doc.currentSchool
+  const profilesArray = await Profile.find({ currentSchool: schoolId })
+
+  if (profilesArray.length === 0) {
+    console.log('No schools found')
+  }
+  console.log(schoolId)
+
+  const countOfStudents = profilesArray.length
+
+  const schoolToUpdate = await School.findById(schoolId)
+
+  if (!schoolToUpdate) {
+    console.log('Could not find a school to update')
+  }
+
+  schoolToUpdate.numberOfProfiles = countOfStudents
+
+  const updatedSchool = await schoolToUpdate.save()
+  console.log(updatedSchool)
+
+  if (!updatedSchool) {
+    console.log(`Failed to update school's number of students`)
+  }
+})
+
+profileSchema.post("findOneAndDelete", async function (doc) {
+  const schoolId = doc.currentSchool
+
+  const schoolToUpdate = await School.findById(schoolId)
+
+  if (!schoolToUpdate) {
+    console.log('Could not find a school to update')
+  }
+
+  schoolToUpdate.numberOfProfiles -= 1 
+
+  const updatedSchool = await schoolToUpdate.save()
+  console.log(updatedSchool)
+
+  if (!updatedSchool) {
+    console.log(`Failed to update school's number of students`)
+  }
+})
 
 const Profile = mongoose.model('Profile', profileSchema)
 

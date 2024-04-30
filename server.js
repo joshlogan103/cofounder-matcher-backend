@@ -12,6 +12,7 @@ import messageRouter from './api/routes/messageRoutes.js';
 import schoolRouter from './api/routes/schoolRoutes.js';
 import conversationRouter from './api/routes/conversationRoutes.js';
 import profileRouter from './api/routes/profileRoutes.js';
+import helperRouter from './api/routes/helperRoutes.js';
 
 // Import database connection
 import './config/db.js'
@@ -32,6 +33,7 @@ app.use('/messages', messageRouter)
 app.use('/schools', schoolRouter)
 app.use('/conversations', conversationRouter)
 app.use('/profiles', profileRouter)
+app.use('/profileListVals', helperRouter)
 
 // Set port for use in server
 const PORT = process.env.PORT || 3001
