@@ -10,9 +10,9 @@ export const signup = async (req, res) => {
   try {
     const userData = req.body
 
-    if (!userData.username || !userData.email || !userData.password) {
+    if (!userData.email || !userData.password) {
       return res.status(400).json({
-        error: `Username, email and password must all be provided: ${error}`
+        error: `Email and password must all be provided: ${error}`
       })
     }
 
@@ -20,12 +20,12 @@ export const signup = async (req, res) => {
 
     if (!newUser) {
       return res.status(406).json({
-        error: `${userData.username} was not created`
+        error: `${userData.email} was not created`
       })
     }
 
     res.json({
-      message: `${newUser.username} was created successfully`
+      message: `${newUser.email} was created successfully`
     })
 
 
@@ -42,17 +42,17 @@ export const login = async (req, res) => {
   try {
     const userData = req.body
 
-    if (!userData.username || !userData.password) {
+    if (!userData.email || !userData.password) {
       return res.status(406).json({
-        error: `Username and password must be provided to login`
+        error: `Email and password must be provided to login`
       })
     }
 
-    const user = await User.findOne({ username: userData.username })
+    const user = await User.findOne({ email: userData.email })
 
     if (!user) {
       return res.status(404).json({
-        error: `Could not find a user in database with username ${userData.username}`
+        error: `Could not find a user in database with email address ${userData.email}`
       })
     }
 
@@ -64,7 +64,7 @@ export const login = async (req, res) => {
       })
     }
 
-    const payload = { username: user.username, userId: user._id, email: user.email }
+    const payload = { email: user.email, userId: user._id }
 
     const accessToken = jwt.sign(
       payload,

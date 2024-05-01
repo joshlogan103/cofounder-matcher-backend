@@ -12,6 +12,8 @@ import {
   deleteProfileById
 } from '../controllers/profileController.js'
 
+import { verifyAuth } from "../middleware/auth.js";
+
 // Routes
 
 // Get all profiles

@@ -5,6 +5,7 @@ import express from "express";
 const router = express.Router()
 
 import { getAllUsers, getUserById, createUser, updateUserById, deleteUserById } from "../controllers/userController.js";
+import { verifyAuth } from "../middleware/auth.js";
 
 // Routes
 
@@ -22,7 +23,7 @@ router.post('/', createUser)
 
 // Update user
 
-router.put('/:id', updateUserById)
+router.put('/:id', verifyAuth, updateUserById)
 
 // Delete user
 

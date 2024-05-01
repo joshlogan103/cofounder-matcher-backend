@@ -17,7 +17,7 @@ router.get('/:id', getFavoriteById )
 
 // Get all favorites by userId
 
-router.get('/myFavorites/:userId', getFavoriteByUserId )
+router.get('/my-favorites/:userId', getFavoriteByUserId )
 
 // Create favorite 
 
