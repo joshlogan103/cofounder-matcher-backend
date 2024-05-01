@@ -49,18 +49,15 @@ const profileSchema = new Schema({
   },
   fullName: {
     type: String,
-    required: true
   },
   lastSeen: {
     type: Date
   },
   aboutMe: {
     type: String,
-    required: true
   },
   connectionInterest: {
     type: String,
-    required: true
   },
   industryInterests: {
     type: [{
@@ -104,16 +101,13 @@ const profileSchema = new Schema({
         'Other'
       ]
     }],
-    required: false
   },
   interestedInBeingACofounder: {
     type: Boolean,
-    required: true
   },
   currentSchool: {
     type: ObjectId,
     ref: 'School',
-    required: true,
   },
   programType: {
     type: String,
@@ -130,7 +124,6 @@ const profileSchema = new Schema({
       'Public Administration',
       'Other'
     ],
-    required: true
   },
   birthDate: {
     type: Date
@@ -154,7 +147,6 @@ const profileSchema = new Schema({
       "Have ideas but not committed",
       "Don't have an idea yet"
     ],
-    required: true
   },
   potentialIdeas: {
     type: [String]
@@ -171,7 +163,6 @@ const profileSchema = new Schema({
         'Legal and Compliance'
       ]
     }],
-    required: false
   },
   cofounderDesiredQualities: {
     type: [String]
