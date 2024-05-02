@@ -6,6 +6,7 @@ const router = express.Router()
 
 import {
   getAllProfiles,
+  getProfilesByQuery,
   getProfileById,
   createProfile,
   updateProfileByUserId,
@@ -20,6 +21,10 @@ import { verifyAuth } from "../middleware/auth.js";
 // Get all profiles
 
 router.get('/', getAllProfiles)
+
+// Get all profiles with query
+
+router.get('/query/', getProfilesByQuery)
 
 // Get profile by id
 

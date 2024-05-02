@@ -22,6 +22,29 @@ export const getAllProfiles = async (req, res) => {
   }
 }
 
+// Get all Profiles matching query params
+
+export const getProfilesByQuery = async (req, res) => {
+  try {
+    const { query } = req.body
+    const profiles = await Profile.find(query)
+
+    if (!profiles
+    ) {
+      return res.status(404).json({
+        error: `No profiles found`
+      })
+    }
+
+    res.json(profiles)
+
+  } catch (error) {
+    res.status(500).json({
+      error: `Internal server error: ${error}`
+    })
+  }
+}
+
 // Get one Profile by ID
 
 export const getProfileById = async (req, res) => {
