@@ -33,7 +33,7 @@ app.use('/messages', messageRouter)
 app.use('/schools', schoolRouter)
 app.use('/conversations', conversationRouter)
 app.use('/profiles', profileRouter)
-app.use('/profileListVals', helperRouter)
+app.use('/profile-list-vals', helperRouter)
 
 // Set port for use in server
 const PORT = process.env.PORT || 3001
