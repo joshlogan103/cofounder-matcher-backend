@@ -8,6 +8,7 @@ import {
   getAllProfiles,
   getProfileById,
   createProfile,
+  updateProfileByUserId,
   updateProfileById,
   deleteProfileById
 } from '../controllers/profileController.js'
@@ -28,7 +29,11 @@ router.get('/:id', getProfileById)
 
 router.post('/', createProfile)
 
-// Update profile
+// Update profile by UserId
+
+router.put('/user-profile/:userId', updateProfileByUserId)
+
+// Update profile by Id
 
 router.put('/:id', updateProfileById)
 

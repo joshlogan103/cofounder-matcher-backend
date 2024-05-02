@@ -76,6 +76,38 @@ export const createProfile = async (req, res) => {
   }
 }
 
+// Update a Profile by userId
+
+export const updateProfileByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params
+    const profileData = req.body
+
+    const profileToUpdate = await Profile.findOne({ userId: userId})
+
+    if (!profileToUpdate) {
+      return res.status(404).json({
+        error: `Could not find a profile with ID ${id}`
+      })
+    }
+
+    Object.entries(profileData).forEach(([key, value]) => {
+      profileToUpdate[key] = value
+    })
+    
+    await profileToUpdate.save()
+
+    res.json({
+      message: `Profile ${profileData.name} was updated successfully`
+    })
+
+  } catch (error) {
+    return res.status(500).json({
+      error: `Internal server error: ${error}`
+    })
+  }
+}
+
 // Update a Profile by ID
 
 export const updateProfileById = async (req, res) => {
