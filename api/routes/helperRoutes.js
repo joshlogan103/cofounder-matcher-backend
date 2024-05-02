@@ -3,11 +3,22 @@ import { getProgramType, getHasIdea, getAreasOfResponsibility, getIndustryIntere
 
 const router = express.Router();
 
-//Routes
+// Routes
 
-router.get('/programType', getProgramType);
-router.get('/hasIdea', getHasIdea);
-router.get('/areasOfResponsibility', getAreasOfResponsibility);
-router.get('/industryInterests', getIndustryInterests);
+// Get all programType values from Profile model enums
+
+router.get('/program-type', getProgramType);
+
+// Get all hasIdea values from Profile model enums
+
+router.get('/has-idea', getHasIdea);
+
+// Get all agreasOfResponsibility values from Profile model enums
+
+router.get('/areas-of-responsibility', getAreasOfResponsibility);
+
+// Get all industryInterest values types from Profile model enums
+
+router.get('/industry-interests', getIndustryInterests);
 
 export default router;
