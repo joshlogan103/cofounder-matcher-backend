@@ -5,30 +5,6 @@ const Schema = mongoose.Schema
 
 const ObjectId = mongoose.Types.ObjectId
 
-const locationSchema = new Schema({
-  country: {
-    type: String
-  },
-  state: {
-    type: String
-  },
-  city: {
-    type: String
-  }
-})
-
-const socialMediaSchema = new Schema({
-  linkedinUrl: {
-    type: String
-  },
-  twitterUrl: {
-    type: String
-  },
-  instagramUrl: {
-    type: String
-  }
-})
-
 const profileSchema = new Schema({
   userId: {
     type: ObjectId,
@@ -173,11 +149,8 @@ const profileSchema = new Schema({
   impressiveAccomplishmnet: {
     type: String,
   },
-  location: {
-    type: locationSchema
-  },
-  socialMedia: {
-    type: socialMediaSchema
+  linkedinUrl: {
+    type: String
   }
 }, { timestamps: true })
 

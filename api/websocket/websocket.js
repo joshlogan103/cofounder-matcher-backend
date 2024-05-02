@@ -2,6 +2,7 @@ import http from 'http';
 import express from 'express';
 import { Server } from 'socket.io';
 
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -12,12 +13,18 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    console.log('a user is connected', socket.id);
+    // console.log('a user is connected', socket.id);
 
     socket.on("message", message => {
-        const userMessage = { ...message, user: socket.id };
-        socket.broadcast.emit("receive-message", userMessage);
-        console.log(userMessage);
+        const messageWithTimestamp = {
+            ...message,
+            user: socket.id,
+            timestamp: new Date().toLocaleTimeString()
+        };
+          
+        socket.emit("receive-message", messageWithTimestamp);
+
+        socket.broadcast.emit("receive-message", messageWithTimestamp);
     });
 
     socket.on('disconnect', () => {
