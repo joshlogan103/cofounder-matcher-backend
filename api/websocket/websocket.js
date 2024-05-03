@@ -10,7 +10,6 @@ export const webSocket = (io) => {
                 user: socket.id,
                 timestamp: new Date().toLocaleTimeString()
             };
-              
             // socket.emit("receive-message", messageWithTimestamp);
     
             socket.broadcast.emit("receive-message", messageWithTimestamp);

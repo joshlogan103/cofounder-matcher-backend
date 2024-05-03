@@ -11,7 +11,8 @@ import {
   createProfile,
   updateProfileByUserId,
   updateProfileById,
-  deleteProfileById
+  deleteProfileById,
+  getProfileByUserId
 } from '../controllers/profileController.js'
 
 import { verifyAuth } from "../middleware/auth.js";
@@ -29,6 +30,10 @@ router.get('/query/', getProfilesByQuery)
 // Get profile by id
 
 router.get('/:id', getProfileById)
+
+// Get profile by user
+
+router.get('/:userId', getProfileByUserId)
 
 // Create profile
 

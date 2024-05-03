@@ -26,7 +26,7 @@ export const getAllProfiles = async (req, res) => {
 
 export const getProfilesByQuery = async (req, res) => {
   try {
-    const { query } = req.body
+    const query = req.body
     const profiles = await Profile.find(query)
 
     if (!profiles
@@ -122,6 +122,33 @@ export const updateProfileByUserId = async (req, res) => {
 
     res.json({
       message: `Profile ${profileData.name} was updated successfully`
+    })
+
+  } catch (error) {
+    return res.status(500).json({
+      error: `Internal server error: ${error}`
+    })
+  }
+}
+
+// Get a Profile by userId
+
+export const getProfileByUserId = async (req, res) => {
+  try {
+    const { userId } = req.params
+
+    const profile = await Profile.findOne({ userId: userId})
+
+    if (!profile) {
+      return res.status(404).json({
+        error: `Could not find a profile with ID ${id}`
+      })
+    }
+
+    res.json(profile)
+
+    res.json({
+      message: `Profile was updated successfully`
     })
 
   } catch (error) {
