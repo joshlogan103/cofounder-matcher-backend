@@ -26,14 +26,14 @@ app.use(morgan('combined'))
 app.use(express.json())
 
 // Routes
-app.use('/auth', authRouter)
-app.use('/users', userRouter)
-app.use('/favorites', favoriteRouter)
-app.use('/messages', messageRouter)
-app.use('/schools', schoolRouter)
-app.use('/conversations', conversationRouter)
-app.use('/profiles', profileRouter)
-app.use('/profile-list-vals', helperRouter)
+app.use('/api/auth', authRouter)
+app.use('/api/users', userRouter)
+app.use('/api/favorites', favoriteRouter)
+app.use('/api/messages', messageRouter)
+app.use('/api/schools', schoolRouter)
+app.use('/api/conversations', conversationRouter)
+app.use('/api/profiles', profileRouter)
+app.use('/api/profileListVals', helperRouter)
 
 // Set port for use in server
 const PORT = process.env.PORT || 3001
