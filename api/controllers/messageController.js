@@ -1,4 +1,5 @@
 import Message from "../models/messageModel.js"
+import Conversation from "../models/conversationModel.js"
 import { createConversationFromMessage, updateConversationFromMessage } from "../services/conversationServices.js";
 
 // Get all messages
@@ -24,17 +25,52 @@ export const getMessageById = async (req, res) => {
   try {
     const { id } = req.params;
     const message = await Message.findById(id);
+
+
     if (!message) {
       return res.status(404).json({
         error: "Message not found"
       });
     }
-    
+
     res.json(message)
 
   } catch (error) {
     res.status(500).json({
       error: `Internal server error: ${error}`
+    });
+  }
+}
+
+
+export const createMessage = async (req, res) => {
+  try {
+    const messageCreated = await Message.create(req.body)
+
+    if (!messageCreated) {
+      return res.status(404).json({
+        error: "Message not created"
+      });
+    } 
+
+    
+    const conversationToUpdate = await Conversation.findById(req.params.conversationId);
+
+    if (!conversationToUpdate) {
+      return res.status(404).json({
+        error: `Could not find a conversation with ID ${req.params.conversationId}`
+      });
+
+    } else {
+      conversationToUpdate.messages.push(messageCreated._id);
+      await conversationToUpdate.save();
+
+      res.json(messageCreated);
+    }
+
+  } catch (error) {
+    res.status(500).json({
+      error: `Internal server error: ${error.toString()}`
     });
   }
 }

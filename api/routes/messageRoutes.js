@@ -3,7 +3,7 @@ import express from "express";
 
 const router = express.Router();
 
-import { getAllMessages, getMessageById, createMessageAndCreateConversation, createMessageAndUpdateConversation, updateMessageById, deleteMessageById } from "../controllers/messageController.js"
+import { getAllMessages, getMessageById, createMessageAndCreateConversation, createMessageAndUpdateConversation, updateMessageById, deleteMessageById, createMessage } from "../controllers/messageController.js"
 // Routes
 
 // Get all messages
@@ -13,6 +13,9 @@ router.get('/', getAllMessages)
 // Get message by id
 
 router.get('/:id', getMessageById)
+
+// create message
+router.post('/:conversationId', createMessage)
 
 // Create message and create a new conversation
 

@@ -3,12 +3,14 @@ import express from "express";
 
 const router = express.Router();
 
-import { getAllConversations, getConversationById, createConversation, updateConversationById, deleteConversationById } from "../controllers/conversationController.js"
+import { getAllConversations, getConversationById, createConversation, updateConversationById, deleteConversationById, getAllUsersConversations } from "../controllers/conversationController.js"
 // Routes
 
 // Get all conversations
 
 router.get('/', getAllConversations)
+
+router.get('/users/:id', getAllUsersConversations)
 
 // Get conversation by id
 

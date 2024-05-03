@@ -26,7 +26,10 @@ export const createConversationFromMessage = async (message) => {
 
 export const updateConversationFromMessage = async (message, conversationId) => {
   try {
-    const conversationToUpdate = await Conversation.findById(conversationId)
+    const conversationToUpdate = await Conversation.findOne({
+      _id: conversationId
+    })
+    console.log(conversationToUpdate, conversationId);
 
     if (!conversationToUpdate) {
       console.log('No conversations found to update')
@@ -43,6 +46,6 @@ export const updateConversationFromMessage = async (message, conversationId) => 
     console.log(updatedConversation)
 
   } catch (error) {
-    console.log(error)
+    console.log(error, 'Failed to update the conversation');
   }
 }

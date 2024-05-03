@@ -13,12 +13,25 @@ import schoolRouter from './api/routes/schoolRoutes.js';
 import conversationRouter from './api/routes/conversationRoutes.js';
 import profileRouter from './api/routes/profileRoutes.js';
 import helperRouter from './api/routes/helperRoutes.js';
+import http from 'http';
+import { Server } from 'socket.io';
 
 // Import database connection
 import './config/db.js'
+import { webSocket } from './api/websocket/websocket.js';
 
 //Initialize express instance
 const app = express()
+
+
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "*"
+    }
+});
+
+webSocket(io)
 
 // Middleware
 app.use(cors())
@@ -39,7 +52,7 @@ app.use('/api/profile-list-vals', helperRouter)
 const PORT = process.env.PORT || 3001
 
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("Server running on port ", PORT)
 })
 

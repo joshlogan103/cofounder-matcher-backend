@@ -20,6 +20,31 @@ export const getAllConversations = async (req, res) => {
     })
   }
 }
+// Get all user Conversations
+
+export const getAllUsersConversations = async (req, res) => {
+  try {
+    // get conversation where user array contain req.params.id
+    const conversations = await Conversation.find({
+      users: {
+        $in: [req.params.id]
+      }
+    })
+
+    if (!conversations) {
+      return res.status(404).json({
+        error: `No conversations found`
+      })
+    }
+
+    res.json(conversations)
+
+  } catch (error) {
+    res.status(500).json({
+      error: `Internal server error: ${error}`
+    })
+  }
+}
 
 // Get one Conversation by ID
 
