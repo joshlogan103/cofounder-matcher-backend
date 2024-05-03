@@ -26,7 +26,7 @@ export const getAllProfiles = async (req, res) => {
 
 export const getProfilesByQuery = async (req, res) => {
   try {
-    const query = req.body
+    const query = req.query
     const profiles = await Profile.find(query)
 
     if (!profiles
