@@ -27,13 +27,14 @@ router.get('/', getAllProfiles)
 
 router.get('/query/', getProfilesByQuery)
 
+// Get profile by user
+
+router.get('/user-profile/:userId', getProfileByUserId)
+
 // Get profile by id
 
 router.get('/:id', getProfileById)
 
-// Get profile by user
-
-router.get('/:userId', getProfileByUserId)
 
 // Create profile
 
