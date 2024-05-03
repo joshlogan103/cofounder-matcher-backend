@@ -147,10 +147,6 @@ export const getProfileByUserId = async (req, res) => {
 
     res.json(profile)
 
-    res.json({
-      message: `Profile was updated successfully`
-    })
-
   } catch (error) {
     return res.status(500).json({
       error: `Internal server error: ${error}`

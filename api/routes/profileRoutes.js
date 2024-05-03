@@ -35,7 +35,6 @@ router.get('/user-profile/:userId', getProfileByUserId)
 
 router.get('/:id', getProfileById)
 
-
 // Create profile
 
 router.post('/', createProfile)

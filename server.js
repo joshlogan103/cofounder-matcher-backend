@@ -25,16 +25,24 @@ const app = express()
 
 
 const server = http.createServer(app);
+console.log(server)
 const io = new Server(server, {
     cors: {
-        origin: "*"
+      origin: true,
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true
     }
 });
 
 webSocket(io)
 
+const corsConfig = {
+  origin: true,
+  methods: ["GET", "POST", "PUT", "DELETE"]
+}
+
 // Middleware
-app.use(cors())
+app.use(cors(corsConfig))
 app.use(morgan('combined'))
 app.use(express.json())
 
