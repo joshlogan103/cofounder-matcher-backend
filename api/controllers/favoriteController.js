@@ -73,6 +73,7 @@ export const getFavoriteByUserId = async (req, res) => {
 
 export const createFavorite = async (req, res) => {
   try {
+    const { userId } = req.user
     const favoriteData = req.body
 
     if (!favoriteData.length === 0) {
@@ -81,7 +82,10 @@ export const createFavorite = async (req, res) => {
       })
     }
 
-    const favoriteCreated = await Favorite.create(favoriteData)
+    const favoriteCreated = await Favorite.create({
+      userId: userId,
+      favoritedProfile: favoriteData.favoritedProfile
+    })
 
     if (!favoriteCreated) {
       return res.status(404).json({
