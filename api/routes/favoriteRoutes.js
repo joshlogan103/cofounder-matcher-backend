@@ -13,13 +13,13 @@ const router = express.Router()
 
 router.get('/', verifyAuth, getAllFavorites)
 
+// Get all favorites by userId
+
+router.get('/my-favorites', verifyAuth, getFavoriteByUserId )
+
 // Get one favorite by id
 
 router.get('/:id', verifyAuth, getFavoriteById )
-
-// Get all favorites by userId
-
-router.get('/my-favorites/:userId', verifyAuth, getFavoriteByUserId )
 
 // Create favorite 
 
