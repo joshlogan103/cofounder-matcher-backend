@@ -52,7 +52,7 @@ export const getFavoriteByUserId = async (req, res) => {
   try {
     const { userId } = req.user
 
-    const favorites = await Favorite.find({ userId: userId})
+    const favorites = await Favorite.find({ userId: userId })
 
     if (!favorites) {
       return res.status(404).json({

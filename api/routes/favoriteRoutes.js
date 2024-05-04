@@ -3,32 +3,34 @@
 import express from "express";
 import { getAllFavorites, getFavoriteById, getFavoriteByUserId, createFavorite, updateFavoriteById, deleteFavoriteById } from "../controllers/favoriteController.js"
 
+import { verifyAuth } from "../middleware/auth.js";
+
 const router = express.Router()
 
 // Routes
 
 // Get all favorites
 
-router.get('/', getAllFavorites)
+router.get('/', verifyAuth, getAllFavorites)
 
 // Get one favorite by id
 
-router.get('/:id', getFavoriteById )
+router.get('/:id', verifyAuth, getFavoriteById )
 
 // Get all favorites by userId
 
-router.get('/my-favorites/:userId', getFavoriteByUserId )
+router.get('/my-favorites/:userId', verifyAuth, getFavoriteByUserId )
 
 // Create favorite 
 
-router.post('/', createFavorite)
+router.post('/', verifyAuth, createFavorite)
 
 // Update favorite by id
 
-router.put('/:id', updateFavoriteById )
+router.put('/:id', verifyAuth, updateFavoriteById )
 
 // Delete favorites by id
 
-router.delete('/:id', deleteFavoriteById)
+router.delete('/:id', verifyAuth, deleteFavoriteById)
 
 export default router

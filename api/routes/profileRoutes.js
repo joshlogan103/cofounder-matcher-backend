@@ -21,34 +21,34 @@ import { verifyAuth } from "../middleware/auth.js";
 
 // Get all profiles
 
-router.get('/', getAllProfiles)
+router.get('/', verifyAuth, getAllProfiles)
 
 // Get all profiles with query
 
-router.get('/query/', getProfilesByQuery)
+router.get('/query/', verifyAuth, getProfilesByQuery)
 
 // Get profile by user
 
-router.get('/user-profile/:userId', getProfileByUserId)
+router.get('/user-profile/:userId', verifyAuth, getProfileByUserId)
 
 // Get profile by id
 
-router.get('/:id', getProfileById)
+router.get('/:id', verifyAuth, getProfileById)
 
 // Create profile
 
-router.post('/', createProfile)
+router.post('/', verifyAuth ,createProfile)
 
 // Update profile by UserId
 
-router.put('/user-profile/:userId', updateProfileByUserId)
+router.put('/user-profile/:userId', verifyAuth, updateProfileByUserId)
 
 // Update profile by Id
 
-router.put('/:id', updateProfileById)
+router.put('/:id', verifyAuth, updateProfileById)
 
 // Delete profile
 
-router.delete('/:id', deleteProfileById)
+router.delete('/:id', verifyAuth, deleteProfileById)
 
 export default router
