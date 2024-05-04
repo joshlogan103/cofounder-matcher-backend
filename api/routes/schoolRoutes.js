@@ -12,11 +12,11 @@ import { verifyAuth } from "../middleware/auth.js";
 
 // Get all schools
 
-router.get('/', verifyAuth, getAllSchools )
+router.get('/', getAllSchools )
 
 // Get one school by id
 
-router.get('/:id', verifyAuth, getSchoolById)
+router.get('/:id', getSchoolById)
 
 // Create school
 
