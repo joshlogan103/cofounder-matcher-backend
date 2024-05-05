@@ -156,7 +156,7 @@ const profileSchema = new Schema({
 
 profileSchema.post('save', function (doc) {
   if (doc.isModified('firstName') || doc.isModified('lastName')) {
-    doc.fullName = `${firstName} ${lastName}`
+    doc.fullName = `${doc.firstName} ${doc.lastName}`
   }
 })
 
