@@ -93,9 +93,7 @@ export const createFavorite = async (req, res) => {
       })
     }
 
-    res.json({
-      message: `Favorite was created successfully`
-    })
+    res.json(favoriteCreated)
 
   } catch (error) {
     res.status(500).json({
