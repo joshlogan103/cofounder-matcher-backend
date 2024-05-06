@@ -32,6 +32,7 @@ export const getAllConversationsByUser= async (req, res) => {
       }
     })
     .populate('messages')
+    .populate('users')
 
     if (!conversations) {
       return res.status(404).json({
