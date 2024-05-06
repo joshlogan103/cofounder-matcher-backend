@@ -17,9 +17,6 @@ router.get('/', verifyAuth, getAllMessages)
 
 router.get('/:id', verifyAuth, getMessageById)
 
-// create message
-router.post('/:conversationId', verifyAuth, createMessage)
-
 // Create message and create a new conversation
 
 router.post('/new-conversation/', verifyAuth, createMessageAndCreateConversation)
@@ -27,6 +24,9 @@ router.post('/new-conversation/', verifyAuth, createMessageAndCreateConversation
 // Create message and update an existing conversation
 
 router.post('/update-conversation/:conversationId', verifyAuth, createMessageAndUpdateConversation)
+
+// create message
+router.post('/:conversationId', verifyAuth, createMessage)
 
 // Update message
 
