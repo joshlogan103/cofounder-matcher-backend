@@ -22,14 +22,16 @@ export const getAllConversations = async (req, res) => {
 }
 // Get all user Conversations
 
-export const getAllUsersConversations = async (req, res) => {
+export const getAllConversationsByUser= async (req, res) => {
   try {
-    // get conversation where user array contain req.params.id
+    const { userId } = req.user
+
     const conversations = await Conversation.find({
       users: {
-        $in: [req.params.id]
+        $in: userId
       }
     })
+    .populate('messages')
 
     if (!conversations) {
       return res.status(404).json({

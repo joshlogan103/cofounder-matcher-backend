@@ -3,7 +3,7 @@ import express from "express";
 
 const router = express.Router();
 
-import { getAllConversations, getConversationById, createConversation, updateConversationById, deleteConversationById, getAllUsersConversations } from "../controllers/conversationController.js"
+import { getAllConversations, getConversationById, createConversation, updateConversationById, deleteConversationById, getAllConversationsByUser } from "../controllers/conversationController.js"
 
 import { verifyAuth } from "../middleware/auth.js";
 
@@ -15,7 +15,7 @@ router.get('/', verifyAuth, getAllConversations)
 
 // Get conversations by a userId
 
-router.get('/users/:id', verifyAuth, getAllUsersConversations)
+router.get('/inbox', verifyAuth, getAllConversationsByUser)
 
 // Get conversation by id
 

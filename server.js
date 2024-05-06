@@ -25,7 +25,6 @@ const app = express()
 
 
 const server = http.createServer(app);
-console.log(server)
 const io = new Server(server, {
     cors: {
       origin: true,
