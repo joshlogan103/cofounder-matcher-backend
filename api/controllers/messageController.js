@@ -79,6 +79,7 @@ export const createMessage = async (req, res) => {
 export const createMessageAndCreateConversation = async (req, res) => {
   try {
     const messageData = req.body;
+    const { userId } = req.user
 
     if (Object.keys(messageData).length === 0) {
       return res.status(404).json({
@@ -86,7 +87,9 @@ export const createMessageAndCreateConversation = async (req, res) => {
       });
     }
 
-    const messageCreated = await Message.create(messageData)
+    const messageObj = { senderId: userId, ...messageData}
+
+    const messageCreated = await Message.create(messageObj)
     console.log(messageCreated)
 
     await createConversationFromMessage(messageCreated)
@@ -106,7 +109,8 @@ export const createMessageAndCreateConversation = async (req, res) => {
 export const createMessageAndUpdateConversation = async (req, res) => {
   try {
     const { conversationId } = req.params
-    const messageData = req.body;
+    const messageData = req.body
+    const { userId } = req.user
 
     if (Object.keys(messageData).length === 0) {
       return res.status(404).json({
@@ -114,7 +118,9 @@ export const createMessageAndUpdateConversation = async (req, res) => {
       });
     }
 
-    const messageCreated = await Message.create(messageData);
+    const messageObj = { senderId: userId, ...messageData}
+
+    const messageCreated = await Message.create(messageObj);
 
     await updateConversationFromMessage(messageCreated, conversationId)
 
