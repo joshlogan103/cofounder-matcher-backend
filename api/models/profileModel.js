@@ -154,9 +154,9 @@ const profileSchema = new Schema({
   }
 }, { timestamps: true })
 
-profileSchema.post('save', function (doc) {
-  if (doc.isModified('firstName') || doc.isModified('lastName')) {
-    doc.fullName = `${doc.firstName} ${doc.lastName}`
+profileSchema.pre('save', function () {
+  if (this.isModified('firstName') || this.isModified('lastName')) {
+    this.fullName = `${this.firstName} ${this.lastName}`
   }
 })
 
