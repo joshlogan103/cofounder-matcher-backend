@@ -27,7 +27,10 @@ export const getAllProfiles = async (req, res) => {
 export const getProfilesByQuery = async (req, res) => {
   try {
     const query = req.query
-    const profiles = await Profile.find(query)
+    const { userId } = req.user
+
+    const mongoQuery = { ...query, _id: {$ne: userId}}
+    const profiles = await Profile.find(mongoQuery)
 
     if (!profiles
     ) {
