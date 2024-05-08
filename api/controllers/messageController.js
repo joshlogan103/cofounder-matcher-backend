@@ -97,7 +97,7 @@ export const createMessageAndCreateConversation = async (req, res) => {
     const existingConvo = await Conversation.find({ users: { $all: userIds, $size: userIds.length}})
 
     if(existingConvo) {
-      await updateConversationFromMessage(messageCreated)
+      await updateConversationFromMessage(messageCreated, existingConvo._id)
     } else {
       await createConversationFromMessage(messageCreated)
     }
