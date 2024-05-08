@@ -82,6 +82,7 @@ export const createMessageAndCreateConversation = async (req, res) => {
     const { userId } = req.user
     const { receiverId } = messageData
     const userIds = [userId, receiverId]
+    console.log(userIds)
 
     if (Object.keys(messageData).length === 0) {
       return res.status(404).json({
@@ -94,7 +95,9 @@ export const createMessageAndCreateConversation = async (req, res) => {
     const messageCreated = await Message.create(messageObj)
     console.log(messageCreated)
 
-    const existingConvo = await Conversation.find({ users: { $all: userIds, $size: userIds.length}})
+    const existingConvo = await Conversation.findOne({ users: { $all: userIds, $size: userIds.length}})
+
+    console.log(existingConvo)
 
     if(existingConvo) {
       await updateConversationFromMessage(messageCreated, existingConvo._id)
